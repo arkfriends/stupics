@@ -1,4 +1,4 @@
 class Background {
-  // start project
+  // start of a new part of the project
   
 }

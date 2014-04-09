@@ -40,9 +40,11 @@ class  Cluster
          float ys = saturation(c);
          stroke(c);
          point(int(80-.2*ys+.2*yh+160*pcnt),int(500-.1*ys -.1*yh -.2*yb)); 
-         output.println(str(pcnt) + ", " + xx + ","+ yy +", "+
-	       xr +"," + xg + "," + xb + ", " +
-	       yh +"," + yb + "," + ys );
+
+// Color analysis of all pixels
+//        output.println(str(pcnt) + ", " + xx + ","+ yy +", "+
+//	       xr +"," + xg + "," + xb + ", " +
+//	       yh +"," + yb + "," + ys );
 	 
        }
   }

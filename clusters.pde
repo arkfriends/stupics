@@ -26,9 +26,9 @@ class  Cluster
          
          // Plotting picture
          color c = img.get(xx,yy);
-         float scale = 100 /img.width ;
+         float scale = 100.0 /img.width ;
          float nx = (100 * pcnt) + (xx * scale); 
-         float ny = scale * xx;
+         float ny = scale * yy;
          stroke(c);
          point(int(nx),int(ny));
          

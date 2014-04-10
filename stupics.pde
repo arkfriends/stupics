@@ -14,8 +14,11 @@ void setup()
   while (plist.morePics())
   {
     PImage img = plist.nextPic();
-    Cluster cl = new Cluster(img,count);
-    count = count+ 1;
+    Cluster cl = new Cluster(img);
+    image(cl.showpic(),100 * count, 0);
+    image(cl.showRGB(),100 * count, 140);
+    image(cl.showHSB(),100 * count, 280);
+    count++;
   }
 
 //  output.flush(); // Writes the remaining data to the temp file

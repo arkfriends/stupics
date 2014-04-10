@@ -1,4 +1,3 @@
-
 // PrintWriter output;
 
 PicList plist;
@@ -18,7 +17,9 @@ void setup()
     Cluster cl = new Cluster(img,count);
     count = count+ 1;
   }
+
 //  output.flush(); // Writes the remaining data to the temp file
 //  output.close();
   noLoop();
 }
+

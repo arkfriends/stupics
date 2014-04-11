@@ -1,11 +1,19 @@
 class  Cluster
 {
   PImage myimg;
+  PImage mymask;
   
   Cluster(PImage img)
   {
     myimg = img;
+    mymask = myimg;
   }
+  
+  Cluster(PImage img, PImage mask)
+  {
+    myimg = img;
+    mymask = mask;
+  }  
   
   PImage makegray(PImage img)
   {
@@ -15,23 +23,35 @@ class  Cluster
      return(img);
   }
   
-  PImage showpic()
-  {          // Plotting picture
-    float scale = 100.0 /myimg.width ;
-    PImage newimg = createImage(100, int(myimg.height * scale), RGB);
+  PImage showPic()
+  {
+     return(show(myimg));
+  }
+  
+  PImage showMask()
+  {
+    return(show(mymask));
+  }
+  
+  PImage show(PImage img)
+  {
+    // Plotting picture
+    float scale = 100.0 /img.width ;
+    PImage newimg = createImage(100, int(img.height * scale), RGB);
     
-    for (int xx= 0; xx < myimg.width; xx++)
+    for (int xx= 0; xx < img.width; xx++)
     {
       float nx = scale * xx; 
-      for (int yy = 0; yy < myimg.height; yy++)
+      for (int yy = 0; yy < img.height; yy++)
        {
-         color c = myimg.get(xx,yy);
+         color c = img.get(xx,yy);
          float ny = scale * yy;
          newimg.set(int(nx),int(ny),c);
        }
     }
     return(newimg);    
   }
+  
   
   
   PImage showRGB()

@@ -14,10 +14,14 @@ void setup()
   while (plist.morePics())
   {
     PImage img = plist.nextPic();
-    Cluster cl = new Cluster(img);
-    image(cl.showpic(),100 * count, 0);
-    image(cl.showRGB(),100 * count, 140);
-    image(cl.showHSB(),100 * count, 280);
+    PImage mask = plist.picMask();
+    Cluster cl = new Cluster(img,mask);
+    image(cl.showPic(),100 * count, 0);
+    fill(0,102,153);
+    text(plist.picName(),5+100 * count,130);
+    image(cl.showRGB(),100 * count, 130);
+    image(cl.showHSB(),100 * count, 260);
+    image(cl.showMask(),100 * count, 390);
     count++;
   }
 

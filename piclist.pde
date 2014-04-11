@@ -39,6 +39,20 @@ class PicList
    else
    {   return(null); }
  }
+ 
+ String picName()
+ {
+   String[] name = split(filenames[currentPic-1],".jpg");
+   return(name[0]);
+ }
+ 
+ PImage picMask()
+ {
+   String filename = picName() + ".png";
+    PImage img;
+    img = loadImage(filename);
+    return(img);
+ }   
 }
 
 

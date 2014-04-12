@@ -137,5 +137,24 @@ class  Cluster
           int(newimg.height -ys*sin(.95*PI) - yb *sin(.5*PI) - yh*sin(.15*PI)), c);
        }
     return(newimg);
+  }  
+  
+  PImage extractFeature(color maskColor)
+  {
+     PImage newimg = createImage(myimg.width, myimg.height, RGB);
+     // Gray background
+    for (int xx= 0; xx < newimg.width; xx++)
+       for (int yy = 0; yy < newimg.height; yy++)
+           newimg.set(xx,yy,color(204,204,204,255));
+    
+    for (int xx= 0; xx < newimg.width; xx++)
+       for (int yy = 0; yy < newimg.height; yy++)
+           if (mymask.get(xx,yy) == maskColor)
+           {
+              newimg.set(xx,yy,myimg.get(xx,yy));
+           }
+           
+    return(newimg);
   }
+  
 }

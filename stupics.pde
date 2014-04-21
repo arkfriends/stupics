@@ -28,7 +28,7 @@ void setup()
     image(cl.show(cl.extractFeature(color(0,0,0))),100* count,340);
     image(cl.show(cl.extractFeature(color(0,255,0))),100* count,465);
     image(cl.show(cl.extractFeature(color(255,0,0))),100* count,435);
-
+    line(0,0,600,600);
     count++;
   }
 

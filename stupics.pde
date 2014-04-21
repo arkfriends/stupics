@@ -26,8 +26,8 @@ void setup()
 // Demonstrate that the mask works: 
 //  Mask colors:  red = face green=tie, black = hair; white = shirt
     image(cl.show(cl.extractFeature(color(0,0,0))),100* count,340);
-    image(cl.show(cl.extractFeature(color(0,255,0))),100* count,460);
-    image(cl.show(cl.extractFeature(color(255,0,0))),100* count,420);
+    image(cl.show(cl.extractFeature(color(0,255,0))),100* count,465);
+    image(cl.show(cl.extractFeature(color(255,0,0))),100* count,435);
 
     count++;
   }

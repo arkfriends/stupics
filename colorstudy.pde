@@ -59,12 +59,7 @@ class ColorStudy
   PImage showRGB()
   {          // Plotting RGB scatterplot
     float scale = 100.0 /myimg.width ;
-    PImage newimg = createImage(100, int(myimg.height * scale), RGB);
-
-    // Gray background
-    for (int xx= 0; xx < newimg.width; xx++)
-       for (int yy = 0; yy < newimg.height; yy++)
-           newimg.set(xx,yy,color(204,204,204));
+    PImage newimg = makegray(createImage(100, int(myimg.height * scale), ARGB));
 
     // RGB axis
     for (int i = 0; i < 50; i++)
@@ -101,15 +96,7 @@ class ColorStudy
   PImage showHSB()
   {          // Plotting RGB scatterplot
     float scale = 100.0 /myimg.width ;
-    PImage newimg = createImage(100, int(myimg.height * scale), RGB);
-  
-    
-    // Gray background
-    for (int xx= 0; xx < newimg.width; xx++)
-       for (int yy = 0; yy < newimg.height; yy++)
-           newimg.set(xx,yy,color(204,204,204));
-    
-     // HSB axis
+    PImage newimg = makegray(createImage(100, int(myimg.height * scale), ARGB));
      
    for (int i = 0; i < 50; i++)
       newimg.set(int(50.0 + i * cos(0.15*PI)), 

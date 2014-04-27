@@ -15,7 +15,7 @@ void setup()
   {
     PImage img = plist.nextPic();
     PImage mask = plist.picMask();
-    Cluster cl = new Cluster(img,mask);
+    ColorStudy cl = new ColorStudy(img,mask);
     image(cl.showPic(),100 * count, 0);
     fill(0,102,153);
     text(plist.picName(),5+100 * count,130);
@@ -26,8 +26,10 @@ void setup()
 // Demonstrate that the mask works: 
 //  Mask colors:  red = face green=tie, black = hair; white = shirt
     image(cl.show(cl.extractFeature(color(0,0,0))),100* count,340);
-    image(cl.show(cl.extractFeature(color(0,255,0))),100* count,465);
-    image(cl.show(cl.extractFeature(color(255,0,0))),100* count,435);
+    image(cl.show(cl.extractFeature(color(255,255,0))),100* count,335);
+    image(cl.show(cl.extractFeature(color(255,0,255))),100* count,345);
+    image(cl.show(cl.extractFeature(color(0,255,0))),100* count,390);
+    image(cl.show(cl.extractFeature(color(255,0,0))),100* count,390);
     count++;
   }
 

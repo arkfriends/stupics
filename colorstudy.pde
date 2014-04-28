@@ -38,7 +38,7 @@ class ColorStudy
   {
     // Plotting picture
     float scale = 100.0 /img.width ;
-    PImage newimg = createImage(100, int(img.height * scale), RGB);
+    PImage newimg = makegray(createImage(100, int(img.height * scale), ARGB));
 
     for (int xx= 0; xx < img.width; xx++)
     {

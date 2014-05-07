@@ -1,11 +1,12 @@
 // PrintWriter output;
 
 PicList plist;
+PrintWriter output;   
 int count;
 
 void setup()
 {
-//  output = createWriter("data/coloranalysis.txt"); 
+  output = createWriter("data/coloranalysis.csv");  
   plist = new PicList();
   frameRate(1);
   size(1000, 600);
@@ -13,9 +14,9 @@ void setup()
   
   while (plist.morePics())
   {
-    PImage img = plist.nextPic();
-    PImage mask = plist.picMask();
-    ColorStudy cl = new ColorStudy(img,mask);
+    ColorStudy cl = new ColorStudy(count, 
+                       plist.nextPic(), plist.picMask(),
+                       plist.picName());
     image(cl.showPic(),100 * count, 0);
     fill(0,102,153);
     text(plist.picName(),5+100 * count,130);
@@ -30,11 +31,12 @@ void setup()
     image(cl.show(cl.extractFeature(color(255,0,255))),100* count,345);
     image(cl.show(cl.extractFeature(color(0,255,0))),100* count,390);
     image(cl.show(cl.extractFeature(color(255,0,0))),100* count,390);
+    cl.saveData();
     count++;
   }
 
-//  output.flush(); // Writes the remaining data to the temp file
-//  output.close();
+  output.flush(); // Writes the remaining data to the file
+  output.close();
   noLoop();
 }
 

@@ -2,18 +2,32 @@ class ColorStudy
 {
   PImage myimg;
   PImage mymask;
+  String myname;
+  Integer myID;
   
   ColorStudy(PImage img)
   {
     myimg = img;
     mymask = myimg;
+    myname = "????";
+    myID = -1;
   }
   
   ColorStudy(PImage img, PImage mask)
   {
     myimg = img;
     mymask = mask;
+    myname = "????";
+    myID = -1;
   }  
+  
+  ColorStudy(Integer picnumber, PImage img, PImage mask, String name)
+  {
+    myimg = img;
+    mymask = mask;
+    myname = name;
+    myID = picnumber;
+  } 
   
   PImage makegray(PImage img)
   {
@@ -137,19 +151,39 @@ class ColorStudy
            if (mymask.get(xx,yy) == maskColor)
            {
               newimg.set(xx,yy,myimg.get(xx,yy));
-           }
-           
+           }         
     return(newimg);
   }
   
-  void saveData(PImage img, String feature)
+  void saveData()
   {
-    PrintWriter output;
-    output = createWriter(feature + ".txt"); 
-
-   output.println(feature);  // Write the coordinate to the file
-
-  output.flush();  // Writes the remaining data to the file
-  output.close();  // Finishes the file
+    Integer feature = 0;
+    for (int xx= 0; xx < myimg.width; xx++)
+       for (int yy = 0; yy < myimg.height; yy++)
+       {  color f = mymask.get(xx,yy);
+       print( red(f));    
+  // "bgnd", "shrt", "hair", "face", "tie",  "lips",  "eyes"
+              if ( f == color(0,0,255))
+              { feature = 1; }
+              else if ( f == color(255,255,255))
+              { feature = 2; }
+              else if ( f == color(0,0,0))
+              { feature = 3; }
+              else if ( f == color(255,0,0))
+              { feature = 4; }
+              else if ( f == color(0,255,0))
+              { feature = 5; }
+              else if ( f == color(255,255,0))
+              { feature = 6; }
+              else if ( f == color(255,0,255))
+              { feature = 7; }
+              else 
+              { feature = 0; }
+              
+              if (feature > 0)
+              {
+                output.println(feature); 
+              }
+           }            
   }
 }

@@ -158,11 +158,14 @@ class ColorStudy
   void saveData()
   {
     Integer feature = 0;
+    output.println("pic,x,y,h,s,b,feature");
     for (int xx= 0; xx < myimg.width; xx++)
        for (int yy = 0; yy < myimg.height; yy++)
-       {  color f = mymask.get(xx,yy);
-       print( red(f));    
+       {
+             color f = mymask.get(xx,yy);
+   
   // "bgnd", "shrt", "hair", "face", "tie",  "lips",  "eyes"
+  
               if ( f == color(0,0,255))
               { feature = 1; }
               else if ( f == color(255,255,255))
@@ -182,6 +185,22 @@ class ColorStudy
               
               if (feature > 0)
               {
+                color c = myimg.get(xx,yy);
+                output.print(myID); 
+                output.print(",");
+                output.print(xx); 
+                output.print(",");
+                output.print(yy); 
+                output.print(",");
+ //               output.print(int(red(c)));
+                output.print(int(hue(c))); 
+                output.print(",");
+ //               output.print(int(green(c)));
+                output.print(int(saturation(c))); 
+                output.print(",");
+//               output.print(int(blue(c)));
+                output.print(int(brightness(c))); 
+                output.print(",");
                 output.println(feature); 
               }
            }            

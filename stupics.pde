@@ -1,5 +1,3 @@
-// PrintWriter output;
-
 PicList plist;
 PrintWriter output;   
 int count;

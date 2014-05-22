@@ -1,3 +1,16 @@
+// Color analysis of an image with a corresponding mask to 
+// identify the following key features of the image:
+// ID  Desc,  Mask rgb
+// -------------------------------------------------
+// 1, "bgnd",  0,0,255
+// 2, "shrt",  255,255,255
+// 3, "hair",  0,0,0
+// 4, "face",  255,0,0
+// 5, "tie",   0,255,0
+// 6, "lips",  255,255,0
+// 7, "eyes",  255,0,255
+///////////////////////////////////////////////////  
+
 class ColorStudy
 {
   PImage myimg;
@@ -158,7 +171,7 @@ class ColorStudy
   void saveData()
   {
     Integer feature = 0;
-    output.println("pic,x,y,h,s,b,feature");
+    output.println("pic,x,y,r,g,b,h,s,v,feature");
     for (int xx= 0; xx < myimg.width; xx++)
        for (int yy = 0; yy < myimg.height; yy++)
        {
@@ -192,13 +205,16 @@ class ColorStudy
                 output.print(",");
                 output.print(yy); 
                 output.print(",");
- //               output.print(int(red(c)));
+                output.print(int(red(c)));
+                output.print(",");
+                output.print(int(green(c)));
+                output.print(",");
+                output.print(int(blue(c)));
+                output.print(",");
                 output.print(int(hue(c))); 
                 output.print(",");
- //               output.print(int(green(c)));
                 output.print(int(saturation(c))); 
                 output.print(",");
-//               output.print(int(blue(c)));
                 output.print(int(brightness(c))); 
                 output.print(",");
                 output.println(feature); 

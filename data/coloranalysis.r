@@ -7,7 +7,8 @@
 # Run with
 # source("coloranalysis.r")
 #############################
-dat = read.csv("coloranalysis.csv", header = TRUE)
+dat = read.csv("coloranalysis.csv", header = TRUE, stringsAsFactors=FALSE)
+
 dat$pic = as.numeric(dat$pic)
 dat$x = as.numeric(dat$x)
 dat$y = as.numeric(dat$y)
@@ -32,45 +33,67 @@ colors = c("#CC0000CC","#CC6600CC",
 
 for (cc in 1:6)
 {
+  max = 0
+  
+  for(f in 1:7)
+  {
+    dat2 = dat[dat$feature == f,]
+    
+    
+      if (cc == 1)
+      { h1 = hist(dat2$r,plot = FALSE, breaks=seq(0,255,3));}
+      else if (cc == 2)
+      { h1 = hist(dat2$g,plot = FALSE,breaks=seq(0,255,3));}
+      else if (cc == 3)
+      { h1 = hist(dat2$b,plot = FALSE,breaks=seq(0,255,3));}
+      else if (cc == 4)
+      { h1 = hist(dat2$h,plot = FALSE, breaks=seq(0,255,3));}
+      else if (cc == 5)
+      { h1 = hist(dat2$s,plot = FALSE,breaks=seq(0,255,3));}
+      else if (cc == 6)
+      { h1 = hist(dat2$v,plot = FALSE,breaks=seq(0,255,3));}
+      
+      m = max(h1$counts) / sum(h1$counts)
+      if(m > max)
+      { max = m; }  
+  }
+    
   pdf(file=paste(clabs[cc],".pdf",sep=""))
-  plot(0,0,type="b",xlim=c(0,255),ylim=c(0,1.2),
+  plot(0,0,type="b",xlim=c(0,255),ylim=c(0,1.2*max),
        col="gray",main=paste("Distribution of", clabs[cc], "Intensities"),
        xlab=paste(clabs[cc]," intensity (0-255)"),
        ylab="Frequency")
+  
+  legend(50,1.2*max,labs,fill=colors[1:7],ncol=4)
   
  
   for(f in 1:7)
   {
     cat(f)
     dat2 = dat[dat$feature == f,]
-    
-
-      for(z in 1:10)
-      {
-        dat3 = dat2[dat2$pic == z,]
         
-        if(length(dat3$r) > 0)
-        {   
+    if(length(dat2$r) > 0)
+    {   
       
       if (cc == 1)
-      { h1 = hist(dat3$r,plot = FALSE, breaks=20);}
+      { h1 = hist(dat2$r,plot = FALSE, breaks=seq(0,255,3));}
       else if (cc == 2)
-      { h1 = hist(dat3$g,plot = FALSE,breaks=20);}
+      { h1 = hist(dat2$g,plot = FALSE,breaks=seq(0,255,3));}
       else if (cc == 3)
-      { h1 = hist(dat3$b,plot = FALSE,breaks=20);}
+      { h1 = hist(dat2$b,plot = FALSE,breaks=seq(0,255,3));}
       else if (cc == 4)
-      { h1 = hist(dat3$h,plot = FALSE, breaks=20);}
+      { h1 = hist(dat2$h,plot = FALSE, breaks=seq(0,255,3));}
       else if (cc == 5)
-      { h1 = hist(dat3$s,plot = FALSE,breaks=20);}
+      { h1 = hist(dat2$s,plot = FALSE,breaks=seq(0,255,3));}
       else if (cc == 6)
-      { h1 = hist(dat3$v,plot = FALSE,breaks=20);}
+      { h1 = hist(dat2$v,plot = FALSE,breaks=seq(0,255,3));}
       
       l = length(h1$counts)
       y = h1$counts
       x = h1$mids
 
       x[l + 1] = (2 * x[l]) - x[l - 1]
-      if (cc == 6)
+      if (cc == 4)
       { 
         if (x[l+1] > 250)
         {  y[l + 1] = y[1]; }
@@ -80,13 +103,60 @@ for (cc in 1:6)
       else
       {  y[l + 1] = 0 }
       
-      total = max(y)
-      lines(x,y/total,col=colors[f],lwd=3)
-      points(x,y/total,col=colors[f],lwd=3,
+      total = sum(y)
+      lines(x,y/total,col=colors[f],lwd=2)
+      points(x,y/total,col=colors[f],lwd=2,
              pch=(c(13,14,15,16,17,18,19,20,21)[f]))
     }
-    }
   }
-  legend(50,1.2,labs,fill=colors[1:7],ncol=4)
   dev.off()
 }
+
+names = c("bette", "ek", "gan", "garfield", "pim",
+          "rock",  "rod", "suvimon", "tree", "weerana")
+colors = rainbow(11)
+
+
+for (cc in 1:6)
+{
+  for (f in 1:7)
+  {
+    
+    pdf(file=paste(clabs[cc],labs[f],"var.pdf",sep=""))
+    plot(0,0,type="b",xlim=c(0,255),ylim=c(0,1.2),
+       col="gray",main=paste("Variation in the Distribution of", clabs[cc], "Values"),
+       sub=paste("Feature:",labs[f]),
+       xlab=paste(clabs[cc]," intensity (0-255)"),
+       ylab="Frequency")
+    legend(0,1.2,names[1:10],fill=colors[1:10],ncol=5)
+    cat(clabs[cc],":\n")    
+    dat1 = dat[dat$feature == f,]    
+    for(pic in 0:9)
+    {
+       cat(pic," ")
+       dat2 = dat1[dat1$pic == pic,]  
+      
+        if (cc == 1)
+        { h1 = hist(dat2$r,plot = FALSE, breaks=seq(0,255,3)); }
+        else if (cc == 2)
+        { h1 = hist(dat2$g,plot = FALSE,breaks=seq(0,255,3)); }
+        else if (cc == 3)
+        { h1 = hist(dat2$b,plot = FALSE,breaks=seq(0,255,3)); }
+        else if (cc == 4)
+        { h1 = hist(dat2$h,plot = FALSE, breaks=seq(0,255,3)); }
+        else if (cc == 5)
+        { h1 = hist(dat2$s,plot = FALSE,breaks=seq(0,255,3)); }
+        else if (cc == 6)
+        { h1 = hist(dat2$v,plot = FALSE,breaks=seq(0,255,3)); }
+      
+      
+      total = max(h1$counts)
+      lines(h1$mids,h1$counts/total,col=colors[pic],lwd=2)
+      points(h1$mids,h1$counts/total,col=colors[pic],lwd=2,
+             pch=pic)
+    } 
+    dev.off()
+  }
+}
+
+

@@ -4,7 +4,8 @@ int count;
 
 void setup()
 {
-  output = createWriter("data/coloranalysis.csv");  
+  output = createWriter("data/coloranalysis.csv");
+  output.println("pic,x,y,r,g,b,h,s,v,feature");	
   plist = new PicList();
   frameRate(1);
   size(1000, 600);

@@ -171,7 +171,6 @@ class ColorStudy
   void saveData()
   {
     Integer feature = 0;
-    output.println("pic,x,y,r,g,b,h,s,v,feature");
     for (int xx= 0; xx < myimg.width; xx++)
        for (int yy = 0; yy < myimg.height; yy++)
        {

@@ -58,7 +58,7 @@ for (cc in 1:6)
       { max = m; }  
   }
     
-  pdf(file=paste(clabs[cc],".pdf",sep=""))
+  png(file=paste(clabs[cc],".png",sep=""))
   plot(0,0,type="b",xlim=c(0,255),ylim=c(0,1.2*max),
        col="gray",main=paste("Distribution of", clabs[cc], "Intensities"),
        xlab=paste(clabs[cc]," intensity (0-255)"),
@@ -122,7 +122,7 @@ for (cc in 1:6)
   for (f in 1:7)
   {
     
-    pdf(file=paste(clabs[cc],labs[f],"var.pdf",sep=""))
+    png(file=paste(clabs[cc],labs[f],"var.png",sep=""))
     plot(0,0,type="b",xlim=c(0,255),ylim=c(0,1.2),
        col="gray",main=paste("Variation in the Distribution of", clabs[cc], "Values"),
        sub=paste("Feature:",labs[f]),

@@ -114,7 +114,7 @@ for (cc in 1:6)
 
 names = c("bette", "ek", "gan", "garfield", "pim",
           "rock",  "rod", "suvimon", "tree", "weerana")
-colors = rainbow(11)
+pcolors = rainbow(11)
 
 
 for (cc in 1:6)
@@ -128,7 +128,7 @@ for (cc in 1:6)
        sub=paste("Feature:",labs[f]),
        xlab=paste(clabs[cc]," intensity (0-255)"),
        ylab="Frequency")
-    legend(0,1.2,names[1:10],fill=colors[1:10],ncol=5)
+    legend(0,1.2,names[1:10],fill=pcolors[1:10],ncol=5)
     cat(clabs[cc],":\n")    
     dat1 = dat[dat$feature == f,]    
     for(pic in 0:9)
@@ -151,12 +151,19 @@ for (cc in 1:6)
       
       
       total = max(h1$counts)
-      lines(h1$mids,h1$counts/total,col=colors[pic],lwd=2)
-      points(h1$mids,h1$counts/total,col=colors[pic],lwd=2,
+      lines(h1$mids,h1$counts/total,col=pcolors[pic],lwd=2)
+      points(h1$mids,h1$counts/total,col=pcolors[pic],lwd=2,
              pch=pic)
     } 
     dev.off()
   }
 }
-
-
+lightcolors = c("#CC000033", "#CC660033", "#CCCC0033", "#00990033",
+                "#00CCCC33", "#0000CC33", "#6600CC33", "#CC00CC33")
+png(file="redsat.png")
+plot(dat$r,dat$s, col=lightcolors[dat$feature],
+     main="Features plotted with saturation and redness",
+     xlab="Red intensity (0-255)", ylab="Saturation (0-255)",
+	 pch=16,ylim=c(0,270))
+legend(100,270,labs,fill=colors[1:7], ncol=3)
+dev.off()    

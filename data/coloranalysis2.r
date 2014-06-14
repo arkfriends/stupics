@@ -2,7 +2,7 @@
 #########################################
 # Copy this to the R environment
 # setwd("d:/gitprojects/stupics/data")
-# setwd("d:/git/stupics/data")
+setwd("d:/git/stupics/data")
 #
 # Run with
 # source("coloranalysis.r")
@@ -58,18 +58,18 @@ for (cc in 1:6)
       { max = m; }  
   }
     
-  png(file=paste(clabs[cc],".png",sep=""))
-  plot(0,0,type="b",xlim=c(0,255),ylim=c(0,1.2*max),
-       col="gray",main=paste("Distribution of", clabs[cc], "Intensities"),
-       xlab=paste(clabs[cc]," intensity (0-255)"),
-       ylab="Frequency")
+ #png(file=paste(clabs[cc],".png",sep=""))
+  # plot(0,0,type="b",xlim=c(0,255),ylim=c(0,1.2*max),
+  #     col="gray",main=paste("Distribution of", clabs[cc], "Intensities"),
+  #     xlab=paste(clabs[cc]," intensity (0-255)"),
+  #     ylab="Frequency")
   
-  legend(50,1.2*max,labs,fill=colors[1:7],ncol=4)
+#  legend(50,1.2*max,labs,fill=colors[1:7],ncol=4)
   
  
   for(f in 1:7)
   {
-    cat(f)
+    # cat(f,"\n")
     dat2 = dat[dat$feature == f,]
         
     if(length(dat2$r) > 0)
@@ -103,67 +103,16 @@ for (cc in 1:6)
       else
       {  y[l + 1] = 0 }
       
-      total = sum(y)
-      lines(x,y/total,col=colors[f],lwd=2)
-      points(x,y/total,col=colors[f],lwd=2,
-             pch=(c(13,14,15,16,17,18,19,20,21)[f]))
+      
+    
+     cat(cc,f,x,"\n")
+     cat(cc,f,y,"\n")
+ #     lines(x,y/total,col=colors[f],lwd=2)
+#      points(x,y/total,col=colors[f],lwd=2,
+#             pch=(c(13,14,15,16,17,18,19,20,21)[f]))
     }
   }
-  dev.off()
+#  dev.off()
 }
 
-names = c("bette", "ek", "gan", "garfield", "pim",
-          "rock",  "rod", "suvimon", "tree", "weerana")
-pcolors = rainbow(11)
 
-
-for (cc in 1:6)
-{
-  for (f in 1:7)
-  {
-    
-    png(file=paste(clabs[cc],labs[f],"var.png",sep=""))
-    plot(0,0,type="b",xlim=c(0,255),ylim=c(0,1.2),
-       col="gray",main=paste("Variation in the Distribution of", clabs[cc], "Values"),
-       sub=paste("Feature:",labs[f]),
-       xlab=paste(clabs[cc]," intensity (0-255)"),
-       ylab="Frequency")
-    legend(0,1.2,names[1:10],fill=pcolors[1:10],ncol=5)
-    cat(clabs[cc],":\n")    
-    dat1 = dat[dat$feature == f,]    
-    for(pic in 0:9)
-    {
-       cat(pic," ")
-       dat2 = dat1[dat1$pic == pic,]  
-      
-        if (cc == 1)
-        { h1 = hist(dat2$r,plot = FALSE, breaks=seq(0,255,3)); }
-        else if (cc == 2)
-        { h1 = hist(dat2$g,plot = FALSE,breaks=seq(0,255,3)); }
-        else if (cc == 3)
-        { h1 = hist(dat2$b,plot = FALSE,breaks=seq(0,255,3)); }
-        else if (cc == 4)
-        { h1 = hist(dat2$h,plot = FALSE, breaks=seq(0,255,3)); }
-        else if (cc == 5)
-        { h1 = hist(dat2$s,plot = FALSE,breaks=seq(0,255,3)); }
-        else if (cc == 6)
-        { h1 = hist(dat2$v,plot = FALSE,breaks=seq(0,255,3)); }
-      
-      
-      total = max(h1$counts)
-      lines(h1$mids,h1$counts/total,col=pcolors[pic],lwd=2)
-      points(h1$mids,h1$counts/total,col=pcolors[pic],lwd=2,
-             pch=pic)
-    } 
-    dev.off()
-  }
-}
-lightcolors = c("#CC000022", "#CC660022", "#CCCC0022", "#00990022",
-                "#00CCCC22", "#0000CC22", "#6600CC22", "#CC00CC22")
-pdf(file="redsat.pdf")
-plot(dat$r,dat$s, col=lightcolors[dat$feature],
-     main="Features plotted with saturation and redness",
-     xlab="Red intensity (0-255)", ylab="Saturation (0-255)",
-	 pch=16,ylim=c(0,270))
-legend(100,270,labs,fill=colors[1:7], ncol=3)
-dev.off()    
